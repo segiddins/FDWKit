@@ -12,6 +12,16 @@
 #pragma mark -
 #pragma mark Authentication
 
+/** Authenticates a FeedWrangler user, must be called (and completed) before any other requests can be made
+ 
+Authenticates the user, setting up the client with a valid access key so that all the other requests can succeed
+ 
+ @param email The user's email
+ @param password The user's password
+ @param clientKey Your FeedWrangler client key
+ @param completionHandler Completion handler that fires after the request finishes
+*/
+
 - (void)authenticateEmail:(NSString *)email 
                  password:(NSString *)password 
                 clientKey:(NSString *)clientKey 
