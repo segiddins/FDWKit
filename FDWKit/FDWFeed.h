@@ -10,7 +10,7 @@
 
 + (instancetype)feedWithDictionary:(NSDictionary *)dictionary;
 
-@property (strong) NSNumber *feedID;
+@property (strong) NSString *feedID;
 @property (strong) NSString *title;
 @property (strong) NSURL    *feedURL;
 @property (strong) NSURL    *siteURL;

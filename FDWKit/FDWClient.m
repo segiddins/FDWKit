@@ -1,6 +1,9 @@
 #import "FDWClient.h"
 #import "FDWUser.h"
 #import "FDWFeed.h"
+#import "FDWItem.h"
+
+#import "NSNumber+BoolToString.h"
 
 @interface FDWClient ()
 
@@ -143,5 +146,119 @@
 
 #pragma mark -
 #pragma mark Feed Item
+
+- (void)fetchFeedItemsWithRead:(NSNumber *)read starred:(NSNumber *)starred feedID:(NSString *)feedID createdSince:(NSDate *)createdSince updatedSince:(NSDate *)updatedSince limit:(NSNumber *)limit offset:(NSNumber *)offset completionHandler:(void (^)(BOOL, NSArray *, NSError *))completionHandler {
+    NSMutableString *requestString = [NSMutableString stringWithFormat:@"feed_items/list?access_token=%@", self.accessToken];
+    if (read) [requestString appendFormat:@"&read=%@", [read fdw_StringValueOfBool]];
+    if (starred) [requestString appendFormat:@"&starred=%@", [starred fdw_StringValueOfBool]];
+    if (feedID) [requestString appendFormat:@"&feed_id=%@", feedID];
+    if (createdSince) [requestString appendFormat:@"&created_since=%d", (NSInteger)[createdSince timeIntervalSince1970]];
+    if (updatedSince) [requestString appendFormat:@"&updated_since=%d", (NSInteger)[updatedSince timeIntervalSince1970]];
+    if (limit) [requestString appendFormat:@"&limit=%@", limit];
+    if (offset) [requestString appendFormat:@"&offset=%@", offset];
+    
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, nil, error);
+    }];
+    [self enqueueHTTPRequestOperation:fetchOperation];
+}
+
+- (void)fetchFeedItemsWithRead:(NSNumber *)read starred:(NSNumber *)starred feed:(FDWFeed *)feed createdSince:(NSDate *)createdSince updatedSince:(NSDate *)updatedSince limit:(NSNumber *)limit offset:(NSNumber *)offset completionHandler:(void (^)(BOOL, NSArray *, NSError *))completionHandler {
+    [self fetchFeedItemsWithRead:read starred:starred feedID:feed.feedID createdSince:createdSince updatedSince:updatedSince limit:limit offset:offset completionHandler:completionHandler];
+}
+
+- (void)searchForFeedItemsWithTerm:(NSString *)searchTerm limit:(NSNumber *)limit offset:(NSString *)offset completionHandler:(void (^)(BOOL, NSArray *, NSError *))completionHandler {
+    NSMutableString *requestString = [NSMutableString stringWithFormat:@"feed_items/search?access_token=%@&search_term=%@", self.accessToken, searchTerm];
+    if (limit) [requestString appendFormat:@"&limit=%@", limit];
+    if (offset) [requestString appendFormat:@"&offset=%@", offset];
+
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *searchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, nil, error);
+    }];
+    [self enqueueHTTPRequestOperation:searchOperation];
+}
+
+- (void)updateFeedItem:(FDWItem *)feedItem withRead:(NSNumber *)read starred:(NSNumber *)starred readLater:(NSNumber *)readLater completionHandler:(void (^)(BOOL, FDWItem *, NSError *))completionHandler {
+    NSMutableString *requestString = [NSMutableString stringWithFormat:@"feed_items/update?access_token=%@&feed_item_id=%@", self.accessToken, feedItem.feedItemID];
+    if (read) [requestString appendFormat:@"&read=%@", read];
+    if (starred) [requestString appendFormat:@"&starred=%@", starred];
+    if (readLater) [requestString appendFormat:@"&read_later=%@", readLater];
+    
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        
+        NSDictionary *feedDict = JSON[@"feed_item"];
+        feedItem.versionKey = feedDict[@"version_key"];
+        feedItem.updatedAt = [NSDate dateWithTimeIntervalSince1970:[feedDict[@"updated_at"] floatValue]];
+        feedItem.starred = feedDict[@"starred"];
+        feedItem.read = feedDict[@"read"];
+        feedItem.readLater = feedDict[@"read_later"];
+        
+        completionHandler(YES, feedItem, nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, nil, error);
+    }];
+    [self enqueueHTTPRequestOperation:updateOperation];
+}
+
+- (void)markFeedItemsAsRead:(NSArray *)feedItems feed:(FDWFeed *)feed createdBefore:(NSDate *)createdBefore completionHandler:(void (^)(BOOL, NSError *))completionHandler {
+    NSMutableString *requestString = [NSMutableString stringWithFormat:@"feed_items/mark_all_read?access_token=%@", self.accessToken];
+    if (feed) [requestString appendFormat:@"&feed_id=%@", feed.feedID];
+    if (createdBefore) [requestString appendFormat:@"&created_on_before=%d", (NSInteger)[createdBefore timeIntervalSince1970]];
+    if (feedItems) {
+        [requestString appendString:@"&feed_item_ids="];
+        for (NSInteger i = 0; i < feedItems.count; i++) {
+            [requestString appendFormat:@"%@,", [feedItems[i] feedItemID]];
+        }
+        [requestString deleteCharactersInRange:NSMakeRange(requestString.length - 1, 1)];
+    }
+    
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        
+        completionHandler(YES, nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, error);
+    }];
+    [self enqueueHTTPRequestOperation:updateOperation];
+}
+
+- (NSMutableArray *)feedItemArrayFromDictionaryArray:(NSArray *)array {
+    NSMutableArray *feedItemArray = [NSMutableArray arrayWithCapacity:array.count];
+    for (NSDictionary *dict in array) {
+        [feedItemArray addObject:[FDWItem feedItemWithDictionary:dict]];
+    }
+    return feedItemArray;
+}
 
 @end
