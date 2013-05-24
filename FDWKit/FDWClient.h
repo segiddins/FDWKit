@@ -6,15 +6,23 @@
 
 + (NSURL *)APIBaseURL; // defaults to "https://feedwrangler.net/api/v2/"
 + (instancetype)sharedClient;
++ (instancetype)sharedClientWithAccessToken:(NSString *)accessToken; // Seeds the shared client with an access token
 
-@property (readonly, strong) FDWUser *authenticatedUser;
+- (id)initWithAccessToken;
 
 #pragma mark -
 #pragma mark Authentication
 
+/**---------------------------------------------------------------------------------------
+ * @name Authentication
+ *  ---------------------------------------------------------------------------------------
+ */
+
 /** Authenticates a FeedWrangler user, must be called (and completed) before any other requests can be made
  
 Authenticates the user, setting up the client with a valid access key so that all the other requests can succeed
+
+As a side effect, this method will cache the user's list of subscriptions
  
  @param email The user's email
  @param password The user's password
@@ -27,13 +35,23 @@ Authenticates the user, setting up the client with a valid access key so that al
                 clientKey:(NSString *)clientKey 
         completionHandler:(void (^)(BOOL success, NSError *error))completionHandler;
 
+/// The access token that the FeedWrangler API requires for all calls (outside of authenticate)
+/// This property will be set upon authentication, or upon initialization (via sharedClientWithAccessToken: or initWithAccessToken:)
 @property (readonly, strong) NSString *accessToken;
 
+/// Returns true if and only if the client has an access token and can make calls to the API
 - (BOOL)isAuthenticated;
+
+/// The client's authenticatd user, or nil
+@property (readonly, strong) FDWUser *authenticatedUser;
+
+/// Logs the user out of the api, invalidating the access token, canceling all pending operations, and flushing the cache
 - (void)logOut;
 
 #pragma mark -
 #pragma mark Subscriptions
+
+/// @name Subscriptions
 
 - (void)fetchCurrentSubscriptionsWithCompletionHandler:(void (^)(BOOL success, NSArray *subscriptions, NSError *error))completionHandler;
 
@@ -45,6 +63,8 @@ Authenticates the user, setting up the client with a valid access key so that al
 
 #pragma mark -
 #pragma mark Feed Items
+
+/// @name Feed Items
 
 - (void)fetchFeedItemsWithRead:(NSNumber *)read 
                        starred:(NSNumber *)starred 
@@ -82,6 +102,9 @@ Authenticates the user, setting up the client with a valid access key so that al
 
 #pragma mark -
 #pragma mark Streams
+
+
+/// @name Streams
 
 - (void)fetchCurrentStreamsWithCompletionHandler:(void (^)(BOOL success, NSArray *streams, NSError *error))completionHandler;
 
