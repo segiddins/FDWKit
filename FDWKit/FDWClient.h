@@ -8,7 +8,7 @@
 + (instancetype)sharedClient;
 + (instancetype)sharedClientWithAccessToken:(NSString *)accessToken; // Seeds the shared client with an access token
 
-- (id)initWithAccessToken;
+- (id)initWithAccessToken:(NSString *)accessToken baseURL:(NSURL *)baseURL;
 
 #pragma mark -
 #pragma mark Authentication

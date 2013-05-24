@@ -25,12 +25,23 @@
 }
 
 + (instancetype)sharedClient {
+    return [self sharedClientWithAccessToken:nil];
+}
+
++ (instancetype)sharedClientWithAccessToken:(NSString *)accessToken {
     static FDWClient *sharedFDWClient;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        sharedFDWClient = [[FDWClient alloc] initWithBaseURL:[self APIBaseURL]];
+        sharedFDWClient = [[self alloc] initWithAccessToken:accessToken baseURL:[self APIBaseURL]];
     });
     return sharedFDWClient;
+}
+
+- (id)initWithAccessToken:(NSString *)accessToken baseURL:(NSURL *)baseURL {
+    if (self = [self initWithBaseURL:baseURL]) {
+        self.accessToken = accessToken;
+    }
+    return self;
 }
 
 #pragma mark -
