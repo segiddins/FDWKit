@@ -3,7 +3,8 @@ Pod::Spec.new do |s|
   s.version      = '0.0.1'                                                                  # 1
   s.summary      = 'A library that encapsulates the FeedWrangler API' # 2
   s.author       = { 'Samuel E. Giddins' => 'segiddins@segiddins.me' }                            # 3
-  s.source       = { :path => '~/Dropbox/Dev/FDWKit'}      # 4
+  s.source       = { :git => "git://github.com/segiddins/FDWKit.git",
+                :tag => "v#{spec.version}"}      # 4
   s.source_files = 'Classes', 'External/**/*.{h,m}', 'FDWKit'                                         # 5
     s.prefix_header_contents = <<-EOS
 #ifdef __OBJC__
