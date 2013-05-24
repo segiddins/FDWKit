@@ -1,6 +1,6 @@
 #import "AFNetworking.h"
 
-@class FDWUser, FDWFeed, FDWItem;
+@class FDWUser, FDWFeed, FDWItem, FDWStream;
 
 @interface FDWClient : AFHTTPClient
 
@@ -19,7 +19,7 @@
 - (BOOL)isAuthenticated;
 - (void)logOut;
 
-#pragma mark - 
+#pragma mark -
 #pragma mark Subscriptions
 
 - (void)fetchCurrentSubscriptionsWithCompletionHandler:(void (^)(BOOL success, NSArray *subscriptions, NSError *error))completionHandler;
@@ -40,5 +40,14 @@
 - (void)updateFeedItem:(FDWItem *)feedItem withRead:(NSNumber *)read starred:(NSNumber *)starred readLater:(NSNumber *)readLater completionHandler:(void (^)(BOOL success, FDWItem *feedItem, NSError *error))completionHandler;
 
 - (void)markFeedItemsAsRead:(NSArray *)feedItems feed:(FDWFeed *)feed createdBefore:(NSDate *)createdBefore completionHandler:(void (^)(BOOL success, NSError *error))completionHandler;
+
+#pragma mark -
+#pragma mark Streams
+
+- (void)fetchCurrentStreamsWithCompletionHandler:(void (^)(BOOL success, NSArray *streams, NSError *error))completionHandler;
+
+- (void)fetchStreamItems:(FDWStream *)stream limit:(NSNumber *)limit offset:(NSNumber *)offset completionHandler:(void (^)(BOOL success, NSArray *feedItems, NSError *error))completionHandler;
+
+- (void)destroyStream:(FDWStream *)stream completionHandler:(void (^)(BOOL success, NSError *error))completionHandler;
 
 @end

@@ -15,15 +15,13 @@
 @property (strong) NSDate   *updatedAt;
 @property (strong) NSURL    *url;
 @property (strong) NSString *title;
-@property (strong) NSNumber *starred;
-@property (strong) NSNumber *read;
-@property (strong) NSNumber *readLater;
+@property (nonatomic, strong) NSNumber *starred;
+@property (nonatomic, strong) NSNumber *read;
+@property (nonatomic, strong) NSNumber *readLater;
 @property (strong) NSString *body;
 @property (strong) NSString *author;
 @property (strong) NSString *feedID;
 @property (strong) NSString *feedName;
-
-//- (void)downloadWithCompletionHandler:(void (^)(BOOL success, NSError *error))completionHandler;
 
 + (instancetype)feedItemWithDictionary:(NSDictionary *)dictionary;
 

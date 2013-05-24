@@ -7,12 +7,9 @@
 //
 
 #import "FDWItem.h"
+#import "FDWClient.h"
 
 @implementation FDWItem
-
-- (void)downloadWithCompletionHandler:(void (^)(BOOL, NSError *))completionHandler {
-    
-}
 
 + (instancetype)feedItemWithDictionary:(NSDictionary *)dictionary {
     FDWItem *item = [[self alloc] init];
@@ -31,6 +28,24 @@
     item.feedID = dictionary[@"feed_id"];
     item.feedName = dictionary[@"feed_name"];
     return item;
+}
+
+- (void)setRead:(NSNumber *)read {
+    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)read starred:(NSNumber *)nil readLater:(NSNumber *)nil completionHandler:^(BOOL success, FDWItem *feedItem, NSError *error) {
+        
+    }];
+}
+
+- (void)setStarred:(NSNumber *)starred {
+    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)nil starred:(NSNumber *)starred readLater:(NSNumber *)nil completionHandler:^(BOOL success, FDWItem *feedItem, NSError *error) {
+        
+    }];
+}
+
+- (void)setReadLater:(NSNumber *)readLater {
+    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)nil starred:(NSNumber *)nil readLater:(NSNumber *)readLater completionHandler:^(BOOL success, FDWItem *feedItem, NSError *error) {
+        
+    }];
 }
 
 - (NSString *)description {

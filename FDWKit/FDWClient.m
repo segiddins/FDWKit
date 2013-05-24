@@ -2,6 +2,7 @@
 #import "FDWUser.h"
 #import "FDWFeed.h"
 #import "FDWItem.h"
+#import "FDWStream.h"
 
 #import "NSNumber+BoolToString.h"
 
@@ -11,6 +12,8 @@
 @property (readwrite) NSString *accessToken;
 
 @property NSMutableArray *subscriptions;
+
+@property NSMutableDictionary *feedItems;
 
 @end
 
@@ -63,7 +66,7 @@
     self.authenticatedUser = nil;
     self.subscriptions = nil;
     [self.operationQueue cancelAllOperations];
-    
+
     NSString *requestString = [NSString stringWithFormat:@"users/logout?access_token=%@", self.accessToken];
     self.accessToken = nil;
     NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
@@ -88,7 +91,7 @@
         completionHandler(YES, self.subscriptions, nil);
         return;
     }
-    
+
 //    https://feedwrangler.net/developers/subscriptions#list
     NSString *requestString = [NSString stringWithFormat:@"subscriptions/list?access_token=%@", self.accessToken];
     NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
@@ -156,7 +159,7 @@
     if (updatedSince) [requestString appendFormat:@"&updated_since=%d", (NSInteger)[updatedSince timeIntervalSince1970]];
     if (limit) [requestString appendFormat:@"&limit=%@", limit];
     if (offset) [requestString appendFormat:@"&offset=%@", offset];
-    
+
     NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -201,7 +204,7 @@
     if (read) [requestString appendFormat:@"&read=%@", read];
     if (starred) [requestString appendFormat:@"&starred=%@", starred];
     if (readLater) [requestString appendFormat:@"&read_later=%@", readLater];
-    
+
     NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -210,14 +213,14 @@
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        
+
         NSDictionary *feedDict = JSON[@"feed_item"];
         feedItem.versionKey = feedDict[@"version_key"];
         feedItem.updatedAt = [NSDate dateWithTimeIntervalSince1970:[feedDict[@"updated_at"] floatValue]];
         feedItem.starred = feedDict[@"starred"];
         feedItem.read = feedDict[@"read"];
         feedItem.readLater = feedDict[@"read_later"];
-        
+
         completionHandler(YES, feedItem, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         completionHandler(NO, nil, error);
@@ -236,7 +239,7 @@
         }
         [requestString deleteCharactersInRange:NSMakeRange(requestString.length - 1, 1)];
     }
-    
+
     NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -245,7 +248,10 @@
             completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        
+
+        for (NSDictionary *item in JSON[@"feed_items"])
+            [self.feedItems[item[@"feed_item_id"]] setRead:item[@"read"]];
+
         completionHandler(YES, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         completionHandler(NO, error);
@@ -256,9 +262,73 @@
 - (NSMutableArray *)feedItemArrayFromDictionaryArray:(NSArray *)array {
     NSMutableArray *feedItemArray = [NSMutableArray arrayWithCapacity:array.count];
     for (NSDictionary *dict in array) {
-        [feedItemArray addObject:[FDWItem feedItemWithDictionary:dict]];
+        FDWItem *item = [FDWItem feedItemWithDictionary:dict];
+        [feedItemArray addObject:item];
+        self.feedItems[item.feedItemID] = item;
     }
     return feedItemArray;
+}
+
+#pragma mark -
+#pragma mark Streams
+
+- (void)fetchCurrentStreamsWithCompletionHandler:(void (^)(BOOL, NSArray *, NSError *))completionHandler {
+    NSString *requestString = [NSString stringWithFormat:@"streams/list?access_token=%@", self.accessToken];
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        completionHandler(YES, [self streamArrayFromDictionaryArray:JSON[@"streams"]], nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, nil, error);
+    }];
+    [self enqueueHTTPRequestOperation:listOperation];
+}
+
+- (void)fetchStreamItems:(FDWStream *)stream limit:(NSNumber *)limit offset:(NSNumber *)offset completionHandler:(void (^)(BOOL, NSArray *, NSError *))completionHandler {
+    NSMutableString *requestString = [NSMutableString stringWithFormat:@"streams/stream_items?access_token=%@&stream_id=%@", self.accessToken, stream.streamID];
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, nil, error);
+    }];
+    [self enqueueHTTPRequestOperation:listOperation];
+}
+
+- (void)destroyStream:(FDWStream *)stream completionHandler:(void (^)(BOOL, NSError *))completionHandler {
+    NSString *requestString = [NSString stringWithFormat:@"streams/destroy?access_token=%@&stream_id=%@", self.accessToken, stream.streamID];
+    NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
+    AFJSONRequestOperation *destroyOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString *result = JSON[@"result"];
+        if (![result isEqualToString:@"success"]) {
+            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            return;
+        }
+        completionHandler(YES, nil);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        completionHandler(NO, error);
+    }];
+    [self enqueueHTTPRequestOperation:destroyOperation];
+}
+
+- (NSMutableArray *)streamArrayFromDictionaryArray:(NSArray *)array {
+    NSMutableArray *streamArray = [NSMutableArray arrayWithCapacity:array.count];
+    for (NSDictionary *dict in array) {
+        [streamArray addObject:[FDWStream streamWithDictionary:dict]];
+    }
+    return streamArray;
 }
 
 @end
