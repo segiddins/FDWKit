@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = 'FDWKit'
   s.version      = '0.0.1'                                                                  # 1
-  s.summary      = 'A library that encapsulates the FeedWrangler AP' # 2
+  s.summary      = 'A library that encapsulates the FeedWrangler API' # 2
   s.author       = { 'Samuel E. Giddins' => 'segiddins@segiddins.me' }                            # 3
   s.source       = { :path => '~/Dropbox/Dev/FDWKit'}      # 4
   s.source_files = 'Classes', 'External/**/*.{h,m}', 'FDWKit'                                         # 5
