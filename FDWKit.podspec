@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/segiddins/FDWKit'
   s.summary      = 'A library that encapsulates the FeedWrangler API.'
   s.author       = { 'Samuel E. Giddins' => 'segiddins@segiddins.me' }
-  s.source       = { :git => "https://github.com/segiddins/FDWKit.git" }
+  s.source       = { :git => "https://github.com/segiddins/FDWKit.git", :tag => "v#{s.version}" }
   s.source_files = 'Classes', 'External/**/*.{h,m}', 'FDWKit'
   s.prefix_header_contents = <<-EOS
 #ifdef __OBJC__
