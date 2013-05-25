@@ -54,7 +54,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *authenticationOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -109,7 +110,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -128,7 +130,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *subscribeOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -146,7 +149,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *unsubscribeOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -175,7 +179,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -199,7 +204,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *searchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -220,7 +226,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -255,7 +262,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -289,7 +297,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -306,7 +315,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
@@ -323,7 +333,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFJSONRequestOperation *destroyOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
-        if (![result isEqualToString:@"success"]) {
+        NSString *error = JSON[@"error"];
+        if (![result isEqualToString:@"success"] && error != [NSNull null]) {
             completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
