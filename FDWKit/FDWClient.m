@@ -212,9 +212,9 @@
 
 - (void)updateFeedItem:(FDWItem *)feedItem withRead:(NSNumber *)read starred:(NSNumber *)starred readLater:(NSNumber *)readLater completionHandler:(void (^)(BOOL, FDWItem *, NSError *))completionHandler {
     NSMutableString *requestString = [NSMutableString stringWithFormat:@"feed_items/update?access_token=%@&feed_item_id=%@", self.accessToken, feedItem.feedItemID];
-    if (read) [requestString appendFormat:@"&read=%@", read];
-    if (starred) [requestString appendFormat:@"&starred=%@", starred];
-    if (readLater) [requestString appendFormat:@"&read_later=%@", readLater];
+    if (read) [requestString appendFormat:@"&read=%@", [read fdw_StringValueOfBool]];
+    if (starred) [requestString appendFormat:@"&starred=%@", [starred fdw_StringValueOfBool]];
+    if (readLater) [requestString appendFormat:@"&read_later=%@", [readLater fdw_StringValueOfBool]];
 
     NSURL *requestURL = [NSURL URLWithString:requestString relativeToURL:self.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
