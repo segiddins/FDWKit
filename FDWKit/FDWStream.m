@@ -27,4 +27,11 @@
     return stream;
 }
 
+- (void)destroy {
+    [[FDWClient sharedClient] destroyStream:self
+                          completionHandler:^(BOOL success, NSError *error) {
+                              
+                          }];
+}
+
 @end
