@@ -1,0 +1,1690 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>FDWClient Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">FDWKit </a></h1>
+				<a id="developerHome" href="../index.html">Samuel E. Giddins</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">FDWClient Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/accessToken">&nbsp;&nbsp;&nbsp;&nbsp;accessToken</option>
+	
+	<option value="//api/name/authenticatedUser">&nbsp;&nbsp;&nbsp;&nbsp;authenticatedUser</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/APIBaseURL">&nbsp;&nbsp;&nbsp;&nbsp;+ APIBaseURL</option>
+	
+	<option value="//api/name/sharedClient">&nbsp;&nbsp;&nbsp;&nbsp;+ sharedClient</option>
+	
+	<option value="//api/name/sharedClientWithAccessToken:">&nbsp;&nbsp;&nbsp;&nbsp;+ sharedClientWithAccessToken:</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/authenticateEmail:password:clientKey:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- authenticateEmail:password:clientKey:completionHandler:</option>
+	
+	<option value="//api/name/destroyStream:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- destroyStream:completionHandler:</option>
+	
+	<option value="//api/name/fetchCurrentStreamsWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- fetchCurrentStreamsWithCompletionHandler:</option>
+	
+	<option value="//api/name/fetchCurrentSubscriptionsWithCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- fetchCurrentSubscriptionsWithCompletionHandler:</option>
+	
+	<option value="//api/name/fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:</option>
+	
+	<option value="//api/name/fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:</option>
+	
+	<option value="//api/name/fetchStreamItems:limit:offset:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- fetchStreamItems:limit:offset:completionHandler:</option>
+	
+	<option value="//api/name/initWithAccessToken:baseURL:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithAccessToken:baseURL:</option>
+	
+	<option value="//api/name/isAuthenticated">&nbsp;&nbsp;&nbsp;&nbsp;- isAuthenticated</option>
+	
+	<option value="//api/name/logOut">&nbsp;&nbsp;&nbsp;&nbsp;- logOut</option>
+	
+	<option value="//api/name/markFeedItemsAsRead:feed:createdBefore:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- markFeedItemsAsRead:feed:createdBefore:completionHandler:</option>
+	
+	<option value="//api/name/searchForFeedItemsWithTerm:limit:offset:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- searchForFeedItemsWithTerm:limit:offset:completionHandler:</option>
+	
+	<option value="//api/name/subscribeToURL:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- subscribeToURL:completionHandler:</option>
+	
+	<option value="//api/name/unsubscribeFromFeed:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- unsubscribeFromFeed:completionHandler:</option>
+	
+	<option value="//api/name/updateFeedItem:withRead:starred:readLater:completionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- updateFeedItem:withRead:starred:readLater:completionHandler:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_API Defaults">API Defaults</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initialization">Initialization</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Authentication">Authentication</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Subscriptions">Subscriptions</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Feed Items">Feed Items</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Streams">Streams</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/accessToken">accessToken</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/authenticatedUser">authenticatedUser</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/APIBaseURL">APIBaseURL</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sharedClient">sharedClient</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sharedClientWithAccessToken:">sharedClientWithAccessToken:</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/authenticateEmail:password:clientKey:completionHandler:">authenticateEmail:password:clientKey:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/destroyStream:completionHandler:">destroyStream:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchCurrentStreamsWithCompletionHandler:">fetchCurrentStreamsWithCompletionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchCurrentSubscriptionsWithCompletionHandler:">fetchCurrentSubscriptionsWithCompletionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:">fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:">fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchStreamItems:limit:offset:completionHandler:">fetchStreamItems:limit:offset:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithAccessToken:baseURL:">initWithAccessToken:baseURL:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isAuthenticated">isAuthenticated</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/logOut">logOut</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/markFeedItemsAsRead:feed:createdBefore:completionHandler:">markFeedItemsAsRead:feed:createdBefore:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/searchForFeedItemsWithTerm:limit:offset:completionHandler:">searchForFeedItemsWithTerm:limit:offset:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/subscribeToURL:completionHandler:">subscribeToURL:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/unsubscribeFromFeed:completionHandler:">unsubscribeFromFeed:completionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateFeedItem:withRead:starred:readLater:completionHandler:">updateFeedItem:withRead:starred:readLater:completionHandler:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="FDWClient Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">FDWClient Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">AFHTTPClient</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">FDWClient.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Handles interaction with the FeedWrangler API, as documented at <a href="https://feedwrangler.net/developers">https://feedwrangler.net/developers</a></p>
+
+<h2>Multi-User Support</h2>
+
+<p>To support multiple users, all you have to do is use one distinct FDWClient per user</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="API Defaults" name="task_API Defaults"></a>
+						<h3 class="subsubtitle task-title">API Defaults</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/APIBaseURL">+&nbsp;APIBaseURL</a></code>
+		<span class="tooltip"><p>The API&rsquo;s base URL
+Defaults to &ldquo;<a href="https://feedwrangler.net/api/v2/">https://feedwrangler.net/api/v2/</a>&rdquo;</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Initialization" name="task_Initialization"></a>
+						<h3 class="subsubtitle task-title">Initialization</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sharedClient">+&nbsp;sharedClient</a></code>
+		<span class="tooltip"><p>Returns the singleton shared client, with no default <a href="#//api/name/accessToken">accessToken</a> set</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sharedClientWithAccessToken:">+&nbsp;sharedClientWithAccessToken:</a></code>
+		<span class="tooltip"><p>Returns the singleton shared client, with the access token set to <a href="#//api/name/accessToken"><code>accessToken</code></a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithAccessToken:baseURL:">&ndash;&nbsp;initWithAccessToken:baseURL:</a></code>
+		<span class="tooltip"><p>Initializes a client with the given baseURL and access token</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Authentication" name="task_Authentication"></a>
+						<h3 class="subsubtitle task-title">Authentication</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/authenticateEmail:password:clientKey:completionHandler:">&ndash;&nbsp;authenticateEmail:password:clientKey:completionHandler:</a></code>
+		<span class="tooltip"><p>Authenticates a FeedWrangler user, must be called (and completed) before any other requests can be made</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/accessToken">&nbsp;&nbsp;accessToken</a></code>
+		<span class="tooltip"><p>The access token that the FeedWrangler API requires for all calls (outside of authenticate)
+This property will be set upon authentication, or upon initialization (via <a href="#//api/name/sharedClientWithAccessToken:">sharedClientWithAccessToken:</a> or <a href="#//api/name/initWithAccessToken:baseURL:">initWithAccessToken:baseURL:</a>)</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isAuthenticated">&ndash;&nbsp;isAuthenticated</a></code>
+		<span class="tooltip"><p>Returns true if and only if the client has an access token and can make calls to the API</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/authenticatedUser">&nbsp;&nbsp;authenticatedUser</a></code>
+		<span class="tooltip"><p>The client&rsquo;s authenticatd user, or nil</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/logOut">&ndash;&nbsp;logOut</a></code>
+		<span class="tooltip"><p>Logs the user out of the API, invalidating the access token, canceling all pending operations, and flushing the cache</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Subscriptions" name="task_Subscriptions"></a>
+						<h3 class="subsubtitle task-title">Subscriptions</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fetchCurrentSubscriptionsWithCompletionHandler:">&ndash;&nbsp;fetchCurrentSubscriptionsWithCompletionHandler:</a></code>
+		<span class="tooltip"><p>Fetches the user&rsquo;s current list of subscriptions</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/subscribeToURL:completionHandler:">&ndash;&nbsp;subscribeToURL:completionHandler:</a></code>
+		<span class="tooltip"><p>Subscribes the user to a feed</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/unsubscribeFromFeed:completionHandler:">&ndash;&nbsp;unsubscribeFromFeed:completionHandler:</a></code>
+		<span class="tooltip"><p>Unsubscribes the user from a feed</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Feed Items" name="task_Feed Items"></a>
+						<h3 class="subsubtitle task-title">Feed Items</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:">&ndash;&nbsp;fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:</a></code>
+		<span class="tooltip"><p>Fetches feed items based on the passed criterion</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:">&ndash;&nbsp;fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:</a></code>
+		<span class="tooltip"><p>Fetches feed items based on the passed criterion</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/searchForFeedItemsWithTerm:limit:offset:completionHandler:">&ndash;&nbsp;searchForFeedItemsWithTerm:limit:offset:completionHandler:</a></code>
+		<span class="tooltip"><p>Searches for items matching a search term</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/updateFeedItem:withRead:starred:readLater:completionHandler:">&ndash;&nbsp;updateFeedItem:withRead:starred:readLater:completionHandler:</a></code>
+		<span class="tooltip"><p>Updates a feed item</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/markFeedItemsAsRead:feed:createdBefore:completionHandler:">&ndash;&nbsp;markFeedItemsAsRead:feed:createdBefore:completionHandler:</a></code>
+		<span class="tooltip"><p>Marks an array of feed items as read</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Streams" name="task_Streams"></a>
+						<h3 class="subsubtitle task-title">Streams</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fetchCurrentStreamsWithCompletionHandler:">&ndash;&nbsp;fetchCurrentStreamsWithCompletionHandler:</a></code>
+		<span class="tooltip"><p>Fetch the user&rsquo;s current smart streams</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fetchStreamItems:limit:offset:completionHandler:">&ndash;&nbsp;fetchStreamItems:limit:offset:completionHandler:</a></code>
+		<span class="tooltip"><p>Fetch a smart stream&rsquo;s items</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/destroyStream:completionHandler:">&ndash;&nbsp;destroyStream:completionHandler:</a></code>
+		<span class="tooltip"><p>Destroys a smart stream</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/accessToken" title="accessToken"></a>
+	<h3 class="subsubtitle method-title">accessToken</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The access token that the FeedWrangler API requires for all calls (outside of authenticate)
+This property will be set upon authentication, or upon initialization (via <a href="#//api/name/sharedClientWithAccessToken:">sharedClientWithAccessToken:</a> or <a href="#//api/name/initWithAccessToken:baseURL:">initWithAccessToken:baseURL:</a>)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, strong) NSString *accessToken</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/authenticatedUser" title="authenticatedUser"></a>
+	<h3 class="subsubtitle method-title">authenticatedUser</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The client&rsquo;s authenticatd user, or nil</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, strong) FDWUser *authenticatedUser</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/APIBaseURL" title="APIBaseURL"></a>
+	<h3 class="subsubtitle method-title">APIBaseURL</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The API&rsquo;s base URL
+Defaults to &ldquo;<a href="https://feedwrangler.net/api/v2/">https://feedwrangler.net/api/v2/</a>&rdquo;</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSURL *)APIBaseURL</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The API&rsquo;s base URL</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sharedClient" title="sharedClient"></a>
+	<h3 class="subsubtitle method-title">sharedClient</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the singleton shared client, with no default <a href="#//api/name/accessToken">accessToken</a> set</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (instancetype)sharedClient</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The shared client</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/sharedClientWithAccessToken:" title="sharedClientWithAccessToken:"></a>
+	<h3 class="subsubtitle method-title">sharedClientWithAccessToken:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the singleton shared client, with the access token set to <a href="#//api/name/accessToken"><code>accessToken</code></a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (instancetype)sharedClientWithAccessToken:(NSString *)<em>accessToken</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>accessToken</em></dt>
+			<dd><p>The initial access token</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The shared client</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/authenticateEmail:password:clientKey:completionHandler:" title="authenticateEmail:password:clientKey:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">authenticateEmail:password:clientKey:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Authenticates a FeedWrangler user, must be called (and completed) before any other requests can be made</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)authenticateEmail:(NSString *)<em>email</em> password:(NSString *)<em>password</em> clientKey:(NSString *)<em>clientKey</em> completionHandler:(void ( ^ ) ( BOOL success , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>email</em></dt>
+			<dd><p>The user&rsquo;s email</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>password</em></dt>
+			<dd><p>The user&rsquo;s password</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>clientKey</em></dt>
+			<dd><p>Your FeedWrangler client key</p>
+
+<p>Go to <a href="https://feedwrangler.net/developers/clients">https://feedwrangler.net/developers/clients</a> to manake your client keys</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>Completion handler that fires after the request finishes</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Authenticates the user, setting up the client with a valid access key so that all the other requests can succeed</p>
+
+<p>Documentation: <a href="https://feedwrangler.net/developers/users">https://feedwrangler.net/developers/users</a>#login</p><div class="note"><p><strong>Note:</strong> As a side effect, this method will cache the user&rsquo;s list of subscriptions</p></div><div class="note"><p><strong>Note:</strong> This method is currently the only way to create an <a href="../Classes/FDWUser.html">FDWUser</a> object</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/destroyStream:completionHandler:" title="destroyStream:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">destroyStream:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Destroys a smart stream</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)destroyStream:(FDWStream *)<em>stream</em> completionHandler:(void ( ^ ) ( BOOL success , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>stream</em></dt>
+			<dd><p>The smart stream to destroy</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes two arguments: the request&rsquo;s success and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/streams">https://feedwrangler.net/developers/streams</a>#destroy</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fetchCurrentStreamsWithCompletionHandler:" title="fetchCurrentStreamsWithCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">fetchCurrentStreamsWithCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fetch the user&rsquo;s current smart streams</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fetchCurrentStreamsWithCompletionHandler:(void ( ^ ) ( BOOL success , NSArray *streams , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWStream.html">FDWStream</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/streams">https://feedwrangler.net/developers/streams</a>#list</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fetchCurrentSubscriptionsWithCompletionHandler:" title="fetchCurrentSubscriptionsWithCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">fetchCurrentSubscriptionsWithCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fetches the user&rsquo;s current list of subscriptions</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fetchCurrentSubscriptionsWithCompletionHandler:(void ( ^ ) ( BOOL success , NSArray *subscriptions , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWFeed.html">FDWFeed</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/subscriptions">https://feedwrangler.net/developers/subscriptions</a>#list</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:" title="fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fetches feed items based on the passed criterion</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fetchFeedItemsWithRead:(NSNumber *)<em>read</em> starred:(NSNumber *)<em>starred</em> feed:(FDWFeed *)<em>feed</em> createdSince:(NSDate *)<em>createdSince</em> updatedSince:(NSDate *)<em>updatedSince</em> limit:(NSNumber *)<em>limit</em> offset:(NSNumber *)<em>offset</em> completionHandler:(void ( ^ ) ( BOOL success , NSArray *feedItems , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>read</em></dt>
+			<dd><p>filter based on read status (<code>@YES</code> or <code>@NO</code>), or dont filter if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>starred</em></dt>
+			<dd><p>filter based on starred status (<code>@YES</code> or <code>@NO</code>), or dont filter if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feed</em></dt>
+			<dd><p>the feed to restrict request to, or <code>nil</code> if all feeds</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>createdSince</em></dt>
+			<dd><p>the oldest created date to fetch from, or no limit if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>updatedSince</em></dt>
+			<dd><p>the oldest updated date to fetch from, or no limit if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limit</em></dt>
+			<dd><p>Maximum number of items to return, or API max if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>offset</em></dt>
+			<dd><p>Number of items to skip before returning results, or none if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWItem.html">FDWItem</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/feed_items">https://feedwrangler.net/developers/feed_items</a>#list</p><div class="note"><p><strong>Note:</strong> this method is the same as fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler, except it takes an <a href="../Classes/FDWFeed.html">FDWFeed</a> object instead of a raw feed id</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:" title="fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">fetchFeedItemsWithRead:starred:feedID:createdSince:updatedSince:limit:offset:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fetches feed items based on the passed criterion</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fetchFeedItemsWithRead:(NSNumber *)<em>read</em> starred:(NSNumber *)<em>starred</em> feedID:(NSString *)<em>feedID</em> createdSince:(NSDate *)<em>createdSince</em> updatedSince:(NSDate *)<em>updatedSince</em> limit:(NSNumber *)<em>limit</em> offset:(NSNumber *)<em>offset</em> completionHandler:(void ( ^ ) ( BOOL success , NSArray *feedItems , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>read</em></dt>
+			<dd><p>filter based on read status (<code>@YES</code> or <code>@NO</code>), or dont filter if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>starred</em></dt>
+			<dd><p>filter based on starred status (<code>@YES</code> or <code>@NO</code>), or dont filter if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feedID</em></dt>
+			<dd><p>the feed ID to restrict request to, or <code>nil</code> if all feeds</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>createdSince</em></dt>
+			<dd><p>the oldest created date to fetch from, or no limit if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>updatedSince</em></dt>
+			<dd><p>the oldest updated date to fetch from, or no limit if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limit</em></dt>
+			<dd><p>Maximum number of items to return, or API max if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>offset</em></dt>
+			<dd><p>Number of items to skip before returning results, or none if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWItem.html">FDWItem</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/feed_items">https://feedwrangler.net/developers/feed_items</a>#list</p><div class="note"><p><strong>Note:</strong> this method is the same as fetchFeedItemsWithRead:starred:feed:createdSince:updatedSince:limit:offset:completionHandler, except it takes a raw feed id instead of an <a href="../Classes/FDWFeed.html">FDWFeed</a> object</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fetchStreamItems:limit:offset:completionHandler:" title="fetchStreamItems:limit:offset:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">fetchStreamItems:limit:offset:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fetch a smart stream&rsquo;s items</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fetchStreamItems:(FDWStream *)<em>stream</em> limit:(NSNumber *)<em>limit</em> offset:(NSNumber *)<em>offset</em> completionHandler:(void ( ^ ) ( BOOL success , NSArray *feedItems , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>stream</em></dt>
+			<dd><p>The stream whose items are to be fetched</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limit</em></dt>
+			<dd><p>Maximum number of items to return, or <code>nil</code> for API default</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>offset</em></dt>
+			<dd><p>Number of items to skip before returning results, or <code>nil</code> for no offset</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWItem.html">FDWItem</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/streams">https://feedwrangler.net/developers/streams</a>#stream_items</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithAccessToken:baseURL:" title="initWithAccessToken:baseURL:"></a>
+	<h3 class="subsubtitle method-title">initWithAccessToken:baseURL:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initializes a client with the given baseURL and access token</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithAccessToken:(NSString *)<em>accessToken</em> baseURL:(NSURL *)<em>baseURL</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>accessToken</em></dt>
+			<dd><p>The initial access token for the client</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>baseURL</em></dt>
+			<dd><p>The baseURL for the client (should be set to <a href="#//api/name/APIBaseURL"><code>[FDWClient APIBaseURL]</code></a> unless you have a reason not to)</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A client with the given access token and base url</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="note"><p><strong>Note:</strong> This is the suggested way to implement multi-user support (by <code>init</code>ing multiple clients, one per user &ndash; can also be done with any other <code>init</code> method)</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isAuthenticated" title="isAuthenticated"></a>
+	<h3 class="subsubtitle method-title">isAuthenticated</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns true if and only if the client has an access token and can make calls to the API</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)isAuthenticated</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/logOut" title="logOut"></a>
+	<h3 class="subsubtitle method-title">logOut</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Logs the user out of the API, invalidating the access token, canceling all pending operations, and flushing the cache</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)logOut</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/users">https://feedwrangler.net/developers/users</a>#logout</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/markFeedItemsAsRead:feed:createdBefore:completionHandler:" title="markFeedItemsAsRead:feed:createdBefore:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">markFeedItemsAsRead:feed:createdBefore:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Marks an array of feed items as read</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)markFeedItemsAsRead:(NSArray *)<em>feedItems</em> feed:(FDWFeed *)<em>feed</em> createdBefore:(NSDate *)<em>createdBefore</em> completionHandler:(void ( ^ ) ( BOOL success , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feedItems</em></dt>
+			<dd><p>Array of <a href="../Classes/FDWItem.html"><code>FDWItem</code></a>s to mark as read, or <code>nil</code> if no limit</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feed</em></dt>
+			<dd><p>Only update items within a particular feed, or <code>nil</code> if no limit</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>createdBefore</em></dt>
+			<dd><p>Limit the application to items created on or before, or <code>nil</code> if no limit</p>
+
+<p>It is recommended that you pass in a <code>createdBefore</code> date of the last time you fetched the specific goup of items from the server</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes two arguments: the request&rsquo;s success and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/feed">https://feedwrangler.net/developers/feed</a>_items#mark_all_read</p><div class="note"><p><strong>Note:</strong> This method only marks the items as read upon success</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/searchForFeedItemsWithTerm:limit:offset:completionHandler:" title="searchForFeedItemsWithTerm:limit:offset:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">searchForFeedItemsWithTerm:limit:offset:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Searches for items matching a search term</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)searchForFeedItemsWithTerm:(NSString *)<em>searchTerm</em> limit:(NSNumber *)<em>limit</em> offset:(NSString *)<em>offset</em> completionHandler:(void ( ^ ) ( BOOL success , NSArray *feedItems , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>searchTerm</em></dt>
+			<dd><p>String to match for the search</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>limit</em></dt>
+			<dd><p>Maximum number of items to return, or API max if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>offset</em></dt>
+			<dd><p>Number of items to skip before returning results, or none if <code>nil</code></p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWItem.html">FDWItem</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/feed_items">https://feedwrangler.net/developers/feed_items</a>#search</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/subscribeToURL:completionHandler:" title="subscribeToURL:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">subscribeToURL:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Subscribes the user to a feed</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)subscribeToURL:(NSString *)<em>url</em> completionHandler:(void ( ^ ) ( BOOL success , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>url</em></dt>
+			<dd><p>The URL to subscribe to</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes two arguments: the request&rsquo;s success and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/subscriptions">https://feedwrangler.net/developers/subscriptions</a>#add_feed</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/unsubscribeFromFeed:completionHandler:" title="unsubscribeFromFeed:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">unsubscribeFromFeed:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Unsubscribes the user from a feed</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)unsubscribeFromFeed:(FDWFeed *)<em>feed</em> completionHandler:(void ( ^ ) ( BOOL success , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feed</em></dt>
+			<dd><p>The feed to unsubscribe from</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes two arguments: the request&rsquo;s success and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/subscriptions">https://feedwrangler.net/developers/subscriptions</a>#remove_feed</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/updateFeedItem:withRead:starred:readLater:completionHandler:" title="updateFeedItem:withRead:starred:readLater:completionHandler:"></a>
+	<h3 class="subsubtitle method-title">updateFeedItem:withRead:starred:readLater:completionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Updates a feed item</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)updateFeedItem:(FDWItem *)<em>feedItem</em> withRead:(NSNumber *)<em>read</em> starred:(NSNumber *)<em>starred</em> readLater:(NSNumber *)<em>readLater</em> completionHandler:(void ( ^ ) ( BOOL success , FDWItem *feedItem , NSError *error ))<em>completionHandler</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feedItem</em></dt>
+			<dd><p>The feed item to update</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>read</em></dt>
+			<dd><p>Changes the read status to @YES or @NO, or pass <code>nil</code> if no change</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>starred</em></dt>
+			<dd><p>Changes the starred status to @YES or @NO, or pass <code>nil</code> if no change</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>readLater</em></dt>
+			<dd><p>Changes the read later status to @YES or @NO, or pass <code>nil</code> if no change</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionHandler</em></dt>
+			<dd><p>A block object to be executed when the request finishes. The block has no return value and takes three arguments: the request&rsquo;s success, an NSArray of <a href="../Classes/FDWItem.html">FDWItem</a> objects, and an error</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Documentation: <a href="https://feedwrangler.net/developers/feed_items">https://feedwrangler.net/developers/feed_items</a>#update</p><div class="note"><p><strong>Note:</strong> This method only changes the feed item upon success</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">FDWClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 Samuel E. Giddins. All rights reserved. (Last updated: 2013-05-24)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>
