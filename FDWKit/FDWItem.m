@@ -13,20 +13,20 @@
 
 + (instancetype)feedItemWithDictionary:(NSDictionary *)dictionary {
     FDWItem *item = [[self alloc] init];
-    item->feedItemID = dictionary[@"feed_item_id"];
-    item->publishedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"published_at"] floatValue]];
-    item->createdAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"created_at"] floatValue]];
-    item->versionKey = dictionary[@"version_key"];
-    item->updatedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"updated_at"] floatValue]];
-    item->url = dictionary[@"url"];
-    item->title = dictionary[@"title"];
-    item->starred = dictionary[@"starred"];
-    item->read = dictionary[@"read"];
-    item->readLater = dictionary[@"readLater"];
-    item->body = dictionary[@"body"];
-    item->author = dictionary[@"author"];
-    item->feedID = dictionary[@"feed_id"];
-    item->feedName = dictionary[@"feed_name"];
+    item->_feedItemID = dictionary[@"feed_item_id"];
+    item->_publishedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"published_at"] floatValue]];
+    item->_createdAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"created_at"] floatValue]];
+    item->_versionKey = dictionary[@"version_key"];
+    item->_updatedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"updated_at"] floatValue]];
+    item->_url = dictionary[@"url"];
+    item->_title = dictionary[@"title"];
+    item->_starred = dictionary[@"starred"];
+    item->_read = dictionary[@"read"];
+    item->_readLater = dictionary[@"readLater"];
+    item->_body = dictionary[@"body"];
+    item->_author = dictionary[@"author"];
+    item->_feedID = dictionary[@"feed_id"];
+    item->_feedName = dictionary[@"feed_name"];
     return item;
 }
 
