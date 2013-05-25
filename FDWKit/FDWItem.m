@@ -18,7 +18,7 @@
     item->_createdAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"created_at"] floatValue]];
     item->_versionKey = dictionary[@"version_key"];
     item->_updatedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"updated_at"] floatValue]];
-    item->_url = dictionary[@"url"];
+    item->_url = [NSURL URLWithString:dictionary[@"url"]];
     item->_title = dictionary[@"title"];
     item->_starred = dictionary[@"starred"];
     item->_read = dictionary[@"read"];

@@ -16,8 +16,8 @@
     FDWFeed *feed = [[FDWFeed alloc] init];
     feed.title = dictionary[@"title"];
     feed.feedID = dictionary[@"feed_id"];
-    feed.feedURL = dictionary[@"feed_url"];
-    feed.siteURL = dictionary[@"site_url"];
+    feed.feedURL = [NSURL URLWithString:dictionary[@"feed_url"]];
+    feed.siteURL = [NSURL URLWithString:dictionary[@"site_url"]];
     return feed;
 }
 
@@ -27,7 +27,7 @@
 
 - (void)unsubscribe {
     [[FDWClient sharedClient] unsubscribeFromFeed:self completionHandler:^(BOOL success, NSError *error) {
-        
+
     }];
 }
 
