@@ -16,8 +16,8 @@
     FDWFeed *feed = [[FDWFeed alloc] init];
     feed.title = dictionary[@"title"];
     feed.feedID = dictionary[@"feed_id"];
-    feed.feedURL = [NSURL URLWithString:dictionary[@"feed_url"]];
-    feed.siteURL = [NSURL URLWithString:dictionary[@"site_url"]];
+    feed.feedURL = dictionary[@"feed_url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"feed_url"]] : nil;
+    feed.siteURL = dictionary[@"site_url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"site_url"]] : nil;
     return feed;
 }
 
