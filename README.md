@@ -4,4 +4,4 @@ The easiest way to access the FeedWrangler API on iOS or OSX. The only dependenc
 
 While the project doen't yet have 100% coverage of the FeedWrangler API, that is the ultimate goal. Feel free to contribute and help smooth out the rough patches, and definitely open up an issue if you use FDWKit in one of your apps so we can get a list going.
 
-Check out the documentation at <segiddins.github.io/FDWKit/Documentation>.
+Check out the documentation at <http://segiddins.github.io/FDWKit/Documentation>.
