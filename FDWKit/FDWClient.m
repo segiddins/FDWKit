@@ -55,15 +55,15 @@
     AFJSONRequestOperation *authenticationOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
         self.accessToken = JSON[@"access_token"];
         self.authenticatedUser = [FDWUser userWithDictionary:JSON[@"user"]];
         self.subscriptions = [self feedArrayFromDictionaryArray:JSON[@"feeds"]];
-        completionHandler(YES, nil);
+        if (completionHandler) completionHandler(YES, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, error);
+        if (completionHandler) completionHandler(NO, error);
     }];
     [self enqueueHTTPRequestOperation:authenticationOperation];
 }
@@ -99,7 +99,7 @@
 
 - (void)fetchCurrentSubscriptionsWithCompletionHandler:(void (^)(BOOL success, NSArray *subscriptions, NSError *error))completionHandler {
     if (self.subscriptions) {
-        completionHandler(YES, self.subscriptions, nil);
+        if (completionHandler) completionHandler(YES, self.subscriptions, nil);
         return;
     }
 
@@ -110,13 +110,13 @@
     AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
         self.subscriptions = [self feedArrayFromDictionaryArray:JSON[@"feeds"]];
-        completionHandler(YES, self.subscriptions, nil);
+        if (completionHandler) completionHandler(YES, self.subscriptions, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, nil, error);
+        if (completionHandler) completionHandler(NO, nil, error);
     }];
     [self enqueueHTTPRequestOperation:listOperation];
 }
@@ -129,13 +129,13 @@
     AFJSONRequestOperation *subscribeOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
         self.subscriptions = nil;
-        completionHandler(YES, nil);
+        if (completionHandler) completionHandler(YES, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, error);
+        if (completionHandler) completionHandler(NO, error);
     }];
     [self enqueueHTTPRequestOperation:subscribeOperation];
 }
@@ -147,13 +147,13 @@
     AFJSONRequestOperation *unsubscribeOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
         [self.subscriptions removeObject:feed];
-        completionHandler(YES, nil);
+        if (completionHandler) completionHandler(YES, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, error);
+        if (completionHandler) completionHandler(NO, error);
     }];
     [self enqueueHTTPRequestOperation:unsubscribeOperation];
 }
@@ -176,12 +176,12 @@
     AFJSONRequestOperation *fetchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
+        if (completionHandler) completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, nil, error);
+        if (completionHandler) completionHandler(NO, nil, error);
     }];
     [self enqueueHTTPRequestOperation:fetchOperation];
 }
@@ -200,12 +200,12 @@
     AFJSONRequestOperation *searchOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
+        if (completionHandler) completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, nil, error);
+        if (completionHandler) completionHandler(NO, nil, error);
     }];
     [self enqueueHTTPRequestOperation:searchOperation];
 }
@@ -221,15 +221,15 @@
     AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
 
         NSDictionary *feedDict = JSON[@"feed_item"];
         [feedItem updateWithDictionary:feedDict];
-        completionHandler(YES, feedItem, nil);
+        if (completionHandler) completionHandler(YES, feedItem, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, nil, error);
+        if (completionHandler) completionHandler(NO, nil, error);
     }];
     [self enqueueHTTPRequestOperation:updateOperation];
 }
@@ -251,16 +251,16 @@
     AFJSONRequestOperation *updateOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
 
         for (NSDictionary *item in JSON[@"feed_items"])
             [self.feedItems[item[@"feed_item_id"]] setRead:item[@"read"]];
 
-        completionHandler(YES, nil);
+        if (completionHandler) completionHandler(YES, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, error);
+        if (completionHandler) completionHandler(NO, error);
     }];
     [self enqueueHTTPRequestOperation:updateOperation];
 }
@@ -285,12 +285,12 @@
     AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        completionHandler(YES, [self streamArrayFromDictionaryArray:JSON[@"streams"]], nil);
+        if (completionHandler) completionHandler(YES, [self streamArrayFromDictionaryArray:JSON[@"streams"]], nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, nil, error);
+        if (completionHandler) completionHandler(NO, nil, error);
     }];
     [self enqueueHTTPRequestOperation:listOperation];
 }
@@ -302,12 +302,12 @@
     AFJSONRequestOperation *listOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, nil, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
+        if (completionHandler) completionHandler(YES, [self feedItemArrayFromDictionaryArray:JSON[@"feed_items"]], nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, nil, error);
+        if (completionHandler) completionHandler(NO, nil, error);
     }];
     [self enqueueHTTPRequestOperation:listOperation];
 }
@@ -319,12 +319,12 @@
     AFJSONRequestOperation *destroyOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSString *result = JSON[@"result"];
         if (![result isEqualToString:@"success"]) {
-            completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
+            if (completionHandler) completionHandler(NO, [NSError errorWithDomain:JSON[@"error"] code:response.statusCode userInfo:nil]);
             return;
         }
-        completionHandler(YES, nil);
+        if (completionHandler) completionHandler(YES, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        completionHandler(NO, error);
+        if (completionHandler) completionHandler(NO, error);
     }];
     [self enqueueHTTPRequestOperation:destroyOperation];
 }

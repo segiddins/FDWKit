@@ -37,25 +37,19 @@
 - (void)setRead:(NSNumber *)read {
     if ([read isEqual:_read]) return;
     _read = read;
-    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)read starred:(NSNumber *)nil readLater:(NSNumber *)nil completionHandler:^(BOOL success, FDWItem *feedItem, NSError *error) {
-
-    }];
+    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)read starred:(NSNumber *)nil readLater:(NSNumber *)nil completionHandler:nil];
 }
 
 - (void)setStarred:(NSNumber *)starred {
     if ([starred isEqual:_starred]) return;
     _starred = starred;
-    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)nil starred:(NSNumber *)starred readLater:(NSNumber *)nil completionHandler:^(BOOL success, FDWItem *feedItem, NSError *error) {
-
-    }];
+    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)nil starred:(NSNumber *)starred readLater:(NSNumber *)nil completionHandler:nil];
 }
 
 - (void)setReadLater:(NSNumber *)readLater {
     if ([readLater isEqual:_readLater]) return;
     _readLater = readLater;
-    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)nil starred:(NSNumber *)nil readLater:(NSNumber *)readLater completionHandler:^(BOOL success, FDWItem *feedItem, NSError *error) {
-
-    }];
+    [[FDWClient sharedClient] updateFeedItem:(FDWItem *)self withRead:(NSNumber *)nil starred:(NSNumber *)nil readLater:(NSNumber *)readLater completionHandler:nil];
 }
 
 - (NSString *)description {

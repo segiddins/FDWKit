@@ -30,9 +30,7 @@
 }
 
 - (void)unsubscribe {
-    [[FDWClient sharedClient] unsubscribeFromFeed:self completionHandler:^(BOOL success, NSError *error) {
-
-    }];
+    [[FDWClient sharedClient] unsubscribeFromFeed:self completionHandler:nil];
 }
 
 @end
