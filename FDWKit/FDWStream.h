@@ -51,4 +51,8 @@
 /// @param dictionary The dictionary to create the stream from
 + (instancetype)streamWithDictionary:(NSDictionary *)dictionary;
 
+/// Updates the stream object with the contents of the dictionary
+/// @param dictionary The dictionary to update the stream with
+- (void)updateWithDictionary:(NSDictionary *)dictionary;
+
 @end

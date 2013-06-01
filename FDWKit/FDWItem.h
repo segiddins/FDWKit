@@ -63,4 +63,8 @@
 /// @param dictionary The dictionary to create the item from
 + (instancetype)feedItemWithDictionary:(NSDictionary *)dictionary;
 
+/// Updates the item object with the contents of the dictionary
+/// @param dictionary The dictionary to update the item with
+- (void)updateWithDictionary:(NSDictionary *)dictionary;
+
 @end

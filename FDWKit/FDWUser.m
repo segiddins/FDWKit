@@ -24,6 +24,12 @@
               readLaterService:FDWReadLaterServiceFromString(dictionary[@"read_later_service"])];
 }
 
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
+    _email = dictionary[@"email"];
+    _accountStatus = FDWAccountStatusFromString(dictionary[@"account_status"]);
+    _readLaterService = FDWReadLaterServiceFromString(dictionary[@"read_later_service"]);
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"<%@ %p> - %@ (%d)", NSStringFromClass([self class]), self, self.email, self.accountStatus];
 }

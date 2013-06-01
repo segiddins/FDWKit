@@ -226,12 +226,7 @@
         }
 
         NSDictionary *feedDict = JSON[@"feed_item"];
-        feedItem.versionKey = feedDict[@"version_key"];
-        feedItem.updatedAt = [NSDate dateWithTimeIntervalSince1970:[feedDict[@"updated_at"] floatValue]];
-        feedItem.starred = feedDict[@"starred"];
-        feedItem.read = feedDict[@"read"];
-        feedItem.readLater = feedDict[@"read_later"];
-
+        [feedItem updateWithDictionary:feedDict];
         completionHandler(YES, feedItem, nil);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         completionHandler(NO, nil, error);

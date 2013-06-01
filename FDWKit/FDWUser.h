@@ -40,7 +40,12 @@ FDWReadLaterService FDWReadLaterServiceFromString(NSString* string);
 
 /// Creates an FDWUser object from the JSON representation that the API returns
 /// @param dictionary The dictionary to create the user from
+/// @return The new user created from the dictionary
 + (instancetype)userWithDictionary:(NSDictionary *)dictionary;
+
+/// Updates the user object with the contents of the dictionary
+/// @param dictionary The dictionary to update the user with
+- (void)updateWithDictionary:(NSDictionary *)dictionary;
 
 @end
 

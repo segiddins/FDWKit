@@ -13,21 +13,25 @@
 
 + (instancetype)feedItemWithDictionary:(NSDictionary *)dictionary {
     FDWItem *item = [[self alloc] init];
-    item->_feedItemID = dictionary[@"feed_item_id"];
-    item->_publishedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"published_at"] floatValue]];
-    item->_createdAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"created_at"] floatValue]];
-    item->_versionKey = dictionary[@"version_key"];
-    item->_updatedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"updated_at"] floatValue]];
-    item->_url = dictionary[@"url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"url"]] : nil;
-    item->_title = dictionary[@"title"];
-    item->_starred = dictionary[@"starred"];
-    item->_read = dictionary[@"read"];
-    item->_readLater = dictionary[@"readLater"];
-    item->_body = dictionary[@"body"];
-    item->_author = dictionary[@"author"];
-    item->_feedID = dictionary[@"feed_id"];
-    item->_feedName = dictionary[@"feed_name"];
+    [item updateWithDictionary:dictionary];
     return item;
+}
+
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
+    if (dictionary[@"feed_item_id"]) _feedItemID = dictionary[@"feed_item_id"];
+    if (dictionary[@"published_at"]) _publishedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"published_at"] floatValue]];
+    if (dictionary[@"created_at"]) _createdAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"created_at"] floatValue]];
+    if (dictionary[@"version_key"]) _versionKey = dictionary[@"version_key"];
+    if (dictionary[@"updated_at"]) _updatedAt = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"updated_at"] floatValue]];
+    if (dictionary[@"url"]) _url = dictionary[@"url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"url"]] : nil;
+    if (dictionary[@"title"]) _title = dictionary[@"title"];
+    if (dictionary[@"starred"]) _starred = dictionary[@"starred"];
+    if (dictionary[@"read"]) _read = dictionary[@"read"];
+    if (dictionary[@"readLater"]) _readLater = dictionary[@"readLater"];
+    if (dictionary[@"body"]) _body = dictionary[@"body"];
+    if (dictionary[@"author"]) _author = dictionary[@"author"];
+    if (dictionary[@"feed_id"]) _feedID = dictionary[@"feed_id"];
+    if (dictionary[@"feed_name"]) _feedName = dictionary[@"feed_name"];
 }
 
 - (void)setRead:(NSNumber *)read {

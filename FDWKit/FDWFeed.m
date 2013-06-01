@@ -14,11 +14,15 @@
 
 + (instancetype)feedWithDictionary:(NSDictionary *)dictionary {
     FDWFeed *feed = [[FDWFeed alloc] init];
-    feed.title = dictionary[@"title"];
-    feed.feedID = dictionary[@"feed_id"];
-    feed.feedURL = dictionary[@"feed_url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"feed_url"]] : nil;
-    feed.siteURL = dictionary[@"site_url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"site_url"]] : nil;
+    [feed updateWithDictionary:dictionary];
     return feed;
+}
+
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
+    _title = dictionary[@"title"];
+    _feedID = dictionary[@"feed_id"];
+    _feedURL = dictionary[@"feed_url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"feed_url"]] : nil;
+    _siteURL = dictionary[@"site_url"] != [NSNull null] ? [NSURL URLWithString:dictionary[@"site_url"]] : nil;
 }
 
 - (NSString *)description {

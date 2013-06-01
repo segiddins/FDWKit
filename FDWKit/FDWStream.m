@@ -18,13 +18,17 @@
 
 + (instancetype)streamWithDictionary:(NSDictionary *)dictionary {
     FDWStream *stream = [[self alloc] init];
-    stream.streamID = dictionary[@"stream_id"];
-    stream.title = dictionary[@"title"];
-    stream.allFeeds = dictionary[@"all_feeds"];
-    stream.onlyUnread = dictionary[@"only_unread"];
-    stream.searchTerm = dictionary[@"search_term"];
-    stream.feeds = [[FDWClient sharedClient] feedArrayFromDictionaryArray:dictionary[@"feeds"]];
+    [stream updateWithDictionary:dictionary];
     return stream;
+}
+
+- (void)updateWithDictionary:(NSDictionary *)dictionary {
+    _streamID = dictionary[@"stream_id"];
+    _title = dictionary[@"title"];
+    _allFeeds = dictionary[@"all_feeds"];
+    _onlyUnread = dictionary[@"only_unread"];
+    _searchTerm = dictionary[@"search_term"];
+    _feeds = [[FDWClient sharedClient] feedArrayFromDictionaryArray:dictionary[@"feeds"]];
 }
 
 - (void)destroy {

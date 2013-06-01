@@ -36,4 +36,8 @@
 /// @param dictionary The dictionary to create the feed from
 + (instancetype)feedWithDictionary:(NSDictionary *)dictionary;
 
+/// Updates the feed object with the contents of the dictionary
+/// @param dictionary The dictionary to update the feed with
+- (void)updateWithDictionary:(NSDictionary *)dictionary;
+
 @end
